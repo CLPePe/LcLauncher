@@ -1,0 +1,186 @@
+from calendar import c
+import curses
+import os
+import webbrowser
+
+def set_window_title(title): #window title
+    os.system(f"title {title}")
+
+def open_minecraft_versions(): #    open minecraft versions
+    appdata = os.getenv('APPDATA')
+    minecraft_versions = os.path.join(appdata, '.minecraft', 'versions')
+    
+    if os.path.exists(minecraft_versions):
+        os.startfile(minecraft_versions)
+        print(f"Đã mở thư mục: {minecraft_versions}")
+    else:
+        print("Thư mục Minecraft không tồn tại!")
+
+def open_softether_vpn():
+    vpn_path = r"C:\Users\Public\Desktop\SoftEther VPN Client Manager.lnk"
+    if os.path.exists(vpn_path):
+        os.startfile(vpn_path)
+        print(f"SoftEther VPN Client Manager geöffnet: {vpn_path}")
+    else:
+        print("SoftEther VPN Client Manager existiert nicht!")
+
+acsii_art = r""" # This file is a part of LCLauncher. Made By PePe and !?
+  /$$$$$$  /$$ /$$                       /$$           /$$$$$$$$                  /$$
+ /$$__  $$| $$|__/                      | $$          |__  $$__/                 | $$
+| $$  \__/| $$ /$$  /$$$$$$  /$$$$$$$  /$$$$$$           | $$  /$$$$$$   /$$$$$$ | $$
+| $$      | $$| $$ /$$__  $$| $$__  $$|_  $$_/           | $$ /$$__  $$ /$$__  $$| $$
+| $$      | $$| $$| $$$$$$$$| $$  \ $$  | $$             | $$| $$  \ $$| $$  \ $$| $$
+| $$    $$| $$| $$| $$_____/| $$  | $$  | $$ /$$         | $$| $$  | $$| $$  | $$| $$
+|  $$$$$$/| $$| $$|  $$$$$$$| $$  | $$  |  $$$$/         | $$|  $$$$$$/|  $$$$$$/| $$
+ \______/ |__/|__/ \_______/|__/  |__/   \___/           |__/ \______/  \______/ |__/
+"""
+print(acsii_art)
+
+def main_menu(stdscr):  #select menu
+    set_window_title("Minecraft Tool")
+    stdscr.clear()
+    options = [
+        "Minecraft Launchers not working rn",
+        "Softether Vpn",
+        "Hack Clients",
+        "Configs",
+        "Alts",
+        "Exit"
+    ]
+    selected_index = 0
+
+    while True:
+        stdscr.clear()
+        for index, option in enumerate(options):
+            if index == selected_index:
+                stdscr.addstr(index, 0, "> " + option, curses.A_BOLD)
+            else:
+                stdscr.addstr(index, 0, "  " + option)
+
+        stdscr.refresh()
+        key = stdscr.getch()
+
+        if key == curses.KEY_UP:
+            selected_index = (selected_index - 1) % len(options)
+        elif key == curses.KEY_DOWN:
+            selected_index = (selected_index + 1) % len(options)
+        elif key == curses.KEY_ENTER or key in [10, 13]:
+            if selected_index == 0:
+                None
+            elif selected_index == 1:
+                open_softether_vpn()
+            elif selected_index == 2:
+                hack_client_menu(stdscr)
+            elif selected_index == 3:
+                config_menu(stdscr)
+            elif selected_index == 4:
+                Alt_menu(stdscr)
+            elif selected_index == 5:
+                break
+
+def config_menu(stdscr): #open cfg menu
+    stdscr.clear()
+    options = [
+        "Join Discord Server",
+        "Open Minecraft Versions",
+        "Back to Main Menu"
+    ]
+    selected_index = 0
+
+    while True:
+        stdscr.clear()
+        for index, option in enumerate(options):
+            if index == selected_index:
+                stdscr.addstr(index, 0, "> " + option, curses.A_BOLD)
+            else:
+                stdscr.addstr(index, 0, "  " + option)
+
+        stdscr.refresh()
+        key = stdscr.getch()
+
+        if key == curses.KEY_UP:
+            selected_index = (selected_index - 1) % len(options)
+        elif key == curses.KEY_DOWN:
+            selected_index = (selected_index + 1) % len(options)
+        elif key == curses.KEY_ENTER or key in [10, 13]:
+            if selected_index == 0:
+                webbrowser.open("https://discord.gg/nGbQ227NK9")
+            elif selected_index == 1:
+                open_minecraft_versions()
+            elif selected_index == 2:
+                break
+
+def hack_client_menu(stdscr): #open hack client menu
+    stdscr.clear()
+    options = [
+        "Liquidbounce",
+        "MoonLight",
+        "Crossine",
+        "Cryptix",
+        "Back to Main Menu"
+    ]
+    selected_index = 0
+
+    while True:
+        stdscr.clear()
+        for index, option in enumerate(options):
+            if index == selected_index:
+                stdscr.addstr(index, 0, "> " + option, curses.A_BOLD)
+            else:
+                stdscr.addstr(index, 0, "  " + option)
+
+        stdscr.refresh()
+        key = stdscr.getch()
+
+        if key == curses.KEY_UP:
+            selected_index = (selected_index - 1) % len(options)
+        elif key == curses.KEY_DOWN:
+            selected_index = (selected_index + 1) % len(options)
+        elif key == curses.KEY_ENTER or key in [10, 13]:
+            if selected_index == 0:
+                webbrowser.open("https://liquidbounce.net")
+            elif selected_index == 1:
+                webbrowser.open("https://github.com/randomguy3725/MoonLight/releases/tag/1.0")
+            elif selected_index == 2:
+                webbrowser.open("https://github.com/shxp3/CrossSine")
+            elif selected_index == 3:
+                webbrowser.open("https://github.com/tri11iona1re/cryptix-client/releases/tag/1.4")
+            elif selected_index == 4:
+                break
+
+def Alt_menu(stdscr): #open alt menu
+    stdscr.clear()
+    options = [
+        "Website",
+        "Back to Main Menu"
+    ]
+    selected_index = 0
+
+    while True:
+        stdscr.clear()
+        for index, option in enumerate(options):
+            if index == selected_index:
+                stdscr.addstr(index, 0, "> " + option, curses.A_BOLD)
+            else:
+                stdscr.addstr(index, 0, "  " + option)
+
+        stdscr.refresh()
+        key = stdscr.getch()
+
+        if key == curses.KEY_UP:
+            selected_index = (selected_index - 1) % len(options)
+        elif key == curses.KEY_DOWN:
+            selected_index = (selected_index + 1) % len(options)
+        elif key == curses.KEY_ENTER or key in [10, 13]:
+            if selected_index == 0:
+                webbrowser.open("https://nicegen.sellsn.io")
+            elif selected_index == 1:
+                break
+
+if __name__ == "__main__":
+    curses.wrapper(main_menu)
+# This file is a part of LCLauncher. Made By PePe and !? 
+
+
+ #(c) 2025 PePe and !?)
+# All rights reserved.
